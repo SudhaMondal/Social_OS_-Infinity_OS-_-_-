@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity OS</title>
+    <style>
+        /* --- DESIGN SYSTEM --- */
+        :root {
+            /* Light, Airy Palette */
+            --bg-default: #f2f6ff; 
+            --glass-surface: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --blur-strength: blur(25px);
+            --primary-accent: #007aff;
+            --text-main: #1d1d1f;
+            --text-sub: #86868b;
+            --shadow-soft: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-icon: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); /* Default nice gradient */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            color: var(--text-main);
+            transition: background 0.5s ease;
+        }
+
+        /* --- UTILS --- */
+        .glass {
+            background: var(--glass-surface);
+            backdrop-filter: var(--blur-strength);
+            -webkit-backdrop-filter: var(--blur-strength); /* Safari support */
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .hidden { display: none !important; }
+
+        /* --- 1. LOGIN SCREEN --- */
+        #login-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-card {
+            width: 90%; max-width: 360px;
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            animation: floatUp 0.6s ease-out;
+        }
+
+        @keyframes floatUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* Custom System Logo */
+        .system-logo {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 22px;
+            margin: 0 auto 20px;
+            color: white; font-size: 40px;
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+        }
+
+        h2 { margin: 0 0 5px 0; font-weight: 700; letter-spacing: -0.5px; }
+        p.subtext { margin: 0 0 25px 0; color: var(--text-sub); font-size: 0.95rem; }
+
+        /* Modern Inputs */
+        .input-group { margin-bottom: 15px; text-align: left; }
+        input {
+            width: 100%; padding: 16px;
+            border: 1px solid transparent;
+            background: rgba(255,255,255,0.6);
+            border-radius: 16px;
+            font-size: 16px; outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        input:focus { background: white; box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15); }
+
+        .btn-primary {
+            width: 100%; padding: 16px;
+            background: var(--primary-accent);
+            color: white; border: none;
+            border-radius: 16px;
+            font-size: 17px; font-weight: 600;
+            cursor: pointer; margin-top: 10px;
+            transition: transform 0.1s;
+        }
+        .btn-primary:active { transform: scale(0.98); }
+
+        /* --- 2. DESKTOP INTERFACE --- */
+        #desktop-layer {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .top-bar {
+            height: 60px;
+            padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 40px; height: 40px;
+            border-radius: 12px; border: none;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer; font-size: 18px; color: #333;
+            transition: 0.2s;
+        }
+        .nav-btn:hover { background: white; }
+
+        /* Main Workspace */
+        .workspace {
+            flex-grow: 1;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding-bottom: 100px; /* Space for dock */
+        }
+
+        /* App Grid */
+        .app-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; /* Increased gap */
+            padding: 20px;
+        }
+
+        .app-item {
+            display: flex; flex-direction: column; align-items: center;
+            text-decoration: none; cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .app-item:hover { transform: scale(1.1); }
+
+        /* The App Icon Visuals */
+        .app-icon {
+            width: 50px; height: 50px; /* Larger Size */
+            border-radius: 22px; /* Smooth Corners */
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-icon);
+            margin-bottom: 12px;
+            color: white; font-size: 40px;
+        }
+        
+        .app-label { font-size: 14px; font-weight: 500; color: #333; text-shadow: 0 1px 10px rgba(255,255,255,0.8); }
+
+        /* Brand Gradients */
+        .brand-fb { background: linear-gradient(180deg, #18ACFE 0%, #0163E0 100%); }
+        .brand-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .brand-x { background: linear-gradient(180deg, #333 0%, #000 100%); }
+
+        /* --- 3. FLOATING DOCK --- */
+        .dock-wrapper {
+            position: fixed; bottom: 25px; width: 100%;
+            display: flex; justify-content: center;
+            z-index: 500;
+        }
+        
+        .dock {
+            padding: 12px 20px;
+            border-radius: 35px;
+            display: flex; align-items: center; gap: 20px;
+            background: rgba(255, 255, 255, 0.65); /* More transparent */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .dock-icon {
+            width: 55px; height: 55px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        .dock-icon:hover { transform: translateY(-10px) scale(1.1); }
+        .dock-icon svg { width: 30px; height: 30px; fill: white; }
+        
+        .dock-divider { width: 1px; height: 35px; background: rgba(0,0,0,0.15); margin: 0 5px; }
+
+        /* Notification Dot Animation */
+        .badge {
+            position: absolute; top: -5px; right: -5px;
+            width: 14px; height: 14px; background: #ff3b30;
+            border: 2px solid white; border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 59, 48, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); } }
+
+        /* System Icons in Dock */
+        .sys-icon { background: rgba(0,0,0,0.05); }
+        .sys-icon svg { fill: #333; }
+        .sys-icon:hover { background: white; }
+
+        /* --- 4. SETTINGS MODAL --- */
+        #settings-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 2000;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .settings-card { background: white; width: 320px; padding: 25px; border-radius: 24px; }
+        
+        .theme-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 15px 0; }
+        .theme-dot {
+            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            border: 2px solid #eee; transition: 0.2s;
+        }
+        .theme-dot:hover { transform: scale(1.1); border-color: #aaa; }
+
+    </style>
+</head>
+<body>
+
+    <div id="login-layer" class="flex-center">
+        <div class="login-card glass">
+            <div class="system-logo flex-center">∞</div>
+            
+            <h2>Infinity OS</h2>
+            <p class="subtext">Secure Social Workspace</p>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Unlock</button>
+            </form>
+            <p id="error-msg" style="color:#ff3b30; font-size:14px; margin-top:15px;" class="hidden">Incorrect Password</p>
+        </div>
+    </div>
+
+    <div id="desktop-layer" class="hidden">
+        
+        <div class="top-bar glass">
+            <div style="display:flex; gap:10px;">
+                <button class="nav-btn flex-center" onclick="window.history.back()" title="Back">❮</button>
+                <button class="nav-btn flex-center" onclick="window.history.forward()" title="Forward">❯</button>
+                <button class="nav-btn flex-center" onclick="location.reload()" title="Refresh">⟳</button>
+            </div>
+
+            <div style="font-weight:600; font-size:18px; color: #444; letter-spacing:-0.5px;">Infinity OS</div>
+
+            <div style="display:flex; gap:10px;">
+                <button class="nav-btn flex-center" onclick="toggleFullScreen()" title="Full Screen">⛶</button>
+                <button class="nav-btn flex-center" onclick="toggleSettings()" title="Customize">⚙️</button>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <div class="app-grid">
+                <a href="https://facebook.com" target="_blank" class="app-item">
+                    <div class="app-icon brand-fb">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </div>
+                    <span class="app-label">Facebook</span>
+                </a>
+
+                <a href="https://instagram.com" target="_blank" class="app-item">
+                    <div class="app-icon brand-ig">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </div>
+                    <span class="app-label">Instagram</span>
+                </a>
+
+                <a href="https://twitter.com" target="_blank" class="app-item">
+                    <div class="app-icon brand-x">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </div>
+                    <span class="app-label">X</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dock-wrapper">
+            <div class="dock">
+                <a href="https://messenger.com" target="_blank" class="dock-icon brand-fb" title="Messenger">
+                    <div class="badge"></div>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.56 5.47 3.97 7.08-.15.93-.56 2.05-1.16 2.91 1.62.17 3.65-.24 5.16-1.19.66.1 1.34.16 2.03.16 5.52 0 10-4.03 10-9S17.52 2 12 2z"/></svg>
+                </a>
+                
+                <a href="https://instagram.com/direct/inbox" target="_blank" class="dock-icon brand-ig" title="DM">
+                    <div class="badge"></div>
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                </a>
+
+                <a href="https://twitter.com/messages" target="_blank" class="dock-icon brand-x" title="X Chat">
+                    <div class="badge"></div>
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+
+                <div class="dock-divider"></div>
+
+                <div class="dock-icon sys-icon" onclick="handleLogout()" title="Logout">
+                    <svg viewBox="0 0 24 24"><path d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012 2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h9z"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-overlay" class="hidden" onclick="if(event.target===this) toggleSettings()">
+        <div class="settings-card">
+            <h3>🎨 Appearance</h3>
+            <p style="color:#666; font-size:14px;">Select a theme:</p>
+            
+            <div class="theme-grid">
+                <div class="theme-dot" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);" onclick="setTheme('linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)')"></div>
+                <div class="theme-dot" style="background: #f0f2f5;" onclick="setTheme('#f0f2f5')"></div>
+                <div class="theme-dot" style="background: linear-gradient(to right, #ff9966, #ff5e62);" onclick="setTheme('linear-gradient(to right, #ff9966, #ff5e62)')"></div>
+                <div class="theme-dot" style="background: #222;" onclick="setTheme('#222')"></div>
+            </div>
+
+            <p style="color:#666; font-size:14px;">Or upload wallpaper:</p>
+            <input type="file" accept="image/*" onchange="uploadWallpaper(event)" style="font-size:14px;">
+
+            <button class="btn-primary" style="margin-top:20px;" onclick="toggleSettings()">Done</button>
+        </div>
+    </div>
+
+    <script>
+        // === CONFIG ===
+        const USERS = { "admin": "1234", "guest": "0000" };
+
+        // === STARTUP ===
+        window.onload = () => {
+            if(sessionStorage.getItem("auth")) showDesktop();
+            const savedBg = localStorage.getItem("wall");
+            if(savedBg) document.body.style.background = savedBg;
+        }
+
+        // === LOGIC ===
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById("username").value.toLowerCase();
+            const p = document.getElementById("password").value;
+            
+            if(USERS[u] && USERS[u] === p) {
+                sessionStorage.setItem("auth", "true");
+                showDesktop();
+            } else {
+                const err = document.getElementById("error-msg");
+                err.classList.remove("hidden");
+                err.style.animation = "shake 0.3s";
+                setTimeout(() => err.style.animation = "", 300);
+            }
+        }
+
+        function showDesktop() {
+            document.getElementById("login-layer").classList.add("hidden");
+            document.getElementById("desktop-layer").classList.remove("hidden");
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem("auth");
+            location.reload();
+        }
+
+        function toggleSettings() {
+            const el = document.getElementById("settings-overlay");
+            if(el.classList.contains("hidden")) el.classList.remove("hidden");
+            else el.classList.add("hidden");
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+            else if (document.exitFullscreen) document.exitFullscreen();
+        }
+
+        // === THEME ENGINE ===
+        function setTheme(bg) {
+            document.body.style.background = bg;
+            localStorage.setItem("wall", bg);
+        }
+
+        function uploadWallpaper(e) {
+            const file = e.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    const css = `url(${evt.target.result}) no-repeat center center / cover`;
+                    setTheme(css);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

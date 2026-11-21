@@ -2,22 +2,12 @@
 
 > *"Because your brain isn't a browser tab switcher, and your social life deserves a proper home screen."*
 
-[![Open Social OS](https://img.shields.io/badge/🚀_Open_Social_OS-Direct_Tab-007aff?style=for-the-badge)](./Social%20OS.html)
-[![Presentation Deck](https://img.shields.io/badge/📊_Presentation-PDF_Deck-6f42c1?style=for-the-badge)](./Social%20OS_2.pdf)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 *Tags:* `UI/UX`, `Web OS`, `Productivity`, `Glassmorphism`, `Social Aggregator`, `Cognitive Ergonomics`
-
----
-
-## 🔗 Direct App & Resource Links
-
-* **Direct App File Tab (`Social OS.html`):** [Open Social OS in a Direct Tab](./Social%20OS.html)
-* **Project Presentation Deck (`Social OS_2.pdf`):** [Open Presentation PDF in a Direct Tab](./Social%20OS_2.pdf)
-* **GitHub Profile:** [SudhaMondal](https://github.com/SudhaMondal)
 
 ---
 
@@ -101,5 +91,3 @@ Our mission? Create a single, secure home page to save your focus and lower the 
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/SudhaMondal/Social_OS_-Infinity_OS-_-.git](https://github.com/SudhaMondal/Social_OS_-Infinity_OS-_-.git)
-
-cd Social_OS_-Infinity_OS-_-

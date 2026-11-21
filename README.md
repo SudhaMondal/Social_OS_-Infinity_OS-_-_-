@@ -133,7 +133,7 @@ No complex installations or package managers required!
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/your-username/social-os.git
+git clone https://github.com/sudhamondal/social-os.git
 
 ```
 

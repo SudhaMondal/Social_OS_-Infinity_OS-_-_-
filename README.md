@@ -2,7 +2,8 @@
 
 > *"Because your brain isn't a browser tab switcher, and your social life deserves a proper home screen."*
 
-[![Launch Social OS](https://img.shields.io/badge/🚀_Launch_Social_OS-Live_App-007aff?style=for-the-badge)](https://sudhamondal.github.io/Social_OS_-Infinity_OS-_-/Social%20OS.html)
+[![Open Social OS](https://img.shields.io/badge/🚀_Open_Social_OS-Direct_Tab-007aff?style=for-the-badge)](./Social%20OS.html)
+[![Presentation Deck](https://img.shields.io/badge/📊_Presentation-PDF_Deck-6f42c1?style=for-the-badge)](./Social%20OS_2.pdf)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
@@ -12,29 +13,25 @@
 
 ---
 
-## 🚀 Try It Live Right Now!
+## 🔗 Direct App & Resource Links
 
-Want to jump straight into the workspace without downloading anything? Click below to open **Social OS** directly in your browser:
-
-👉 **[Open Social OS (Infinity OS) Live](https://sudhamondal.github.io/Social_OS_-Infinity_OS-_-/Social%20OS.html)**  
-*(Backup Direct HTML Preview: [Launch via HTMLPreview](https://htmlpreview.github.io/?https://github.com/SudhaMondal/Social_OS_-Infinity_OS-_-/blob/main/Social%20OS.html))*
-
-* **Default Login:** `admin` | **Password:** `1234`
-* **Guest Login:** `guest` | **Password:** `0000`
+* **Direct App File Tab (`Social OS.html`):** [Open Social OS in a Direct Tab](./Social%20OS.html)
+* **Project Presentation Deck (`Social OS_2.pdf`):** [Open Presentation PDF in a Direct Tab](./Social%20OS_2.pdf)
+* **GitHub Profile:** [SudhaMondal](https://github.com/SudhaMondal)
 
 ---
 
 ## 🎮 Welcome, Player (New Contributor)!
 
-Leveling up a project is always more fun when you know the lore. **Social OS** (or *Infinity OS*) isn't just another social network—it's an **Aggregator Layer** built to fix how we live with the ones we already use[cite: 2, 20]. 
+Leveling up a project is always more fun when you know the lore. **Social OS** (or *Infinity OS*) isn't just another social network—it's an **Aggregator Layer** built to fix how we live with the ones we already use[cite: 2, 20].
 
-Think of it like an operating system for your digital socialization. Instead of jumping across chaotic tabs and burning out your brain, Social OS wraps Facebook, Instagram, and X (Twitter) into a unified, secure, glassmorphic desktop[cite: 2, 8, 9, 15].
+Think of it like an operating system for your digital socialization[cite: 2]. Instead of jumping across chaotic tabs and burning out your brain, Social OS wraps Facebook, Instagram, and X (Twitter) into a unified, secure, glassmorphic desktop[cite: 2, 8, 9, 15].
 
 ---
 
 ## 🧠 The Lore & Why We Built It
 
-Science proves that every time you hop from an Instagram scroll to an X text thread, your brain suffers a **"cognitive reorientation cost"** (rule activation delay), slowing your productivity down by up to 40%[cite: 3]. Combine that with Sensor Tower data showing users cycle through dozens of apps daily, and you get digital exhaustion[cite: 4]. 
+Science proves that every time you hop from an Instagram scroll to an X text thread, your brain suffers a **"cognitive reorientation cost"** (rule activation delay), slowing your productivity down by up to 40%[cite: 3]. Combine that with Sensor Tower data showing users cycle through dozens of apps daily, and you get digital exhaustion[cite: 4].
 
 Our mission? Create a single, secure home page to save your focus and lower the digital friction[cite: 2, 8].
 
@@ -53,13 +50,13 @@ Our mission? Create a single, secure home page to save your focus and lower the 
 * **🔒 Secure Login Gateway:** Keeps prying eyes out by wiping session state on logout or tab close[cite: 8].
 * **🪄 Floating Glass Dock:** Positioned right in the optimal "thumb zone" at the bottom center for instant messaging access, complete with pulsing urgency badges[cite: 11, 12].
 * **🧭 Unified Navigation Hub:** Embedded back, forward, refresh, and full-screen controls keep you anchored inside the OS canvas[cite: 15, 19].
-* **🎨 Customization Engine:** Switch color gradients on the fly or upload your own custom wallpaper[cite: 16].
+* **🎨 Customization Engine:** Switch color gradients on the fly or upload your own custom wallpaper.
 
 ---
 
 ## 🎮 What Users Can Do (Gameplay Loop)
 
-1. **Spawn In:** Log in with credentials (`admin` / `1234` or `guest` / `0000`)[cite: 16].
+1. **Spawn In:** Log in with credentials (`admin` / `1234` or `guest` / `0000`).
 2. **Explore the Desktop:** Launch Facebook, Instagram, or X from the central grid[cite: 15].
 3. **Chat via Dock:** Quick-access Messenger, Instagram DMs, and X chats without hunting through tabs[cite: 11, 12, 15].
 4. **Customize Your Realm:** Open settings (`⚙️`) to swap themes or upload a custom background[cite: 15, 16].
@@ -104,3 +101,5 @@ Our mission? Create a single, secure home page to save your focus and lower the 
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/SudhaMondal/Social_OS_-Infinity_OS-_-.git](https://github.com/SudhaMondal/Social_OS_-Infinity_OS-_-.git)
+
+cd Social_OS_-Infinity_OS-_-
